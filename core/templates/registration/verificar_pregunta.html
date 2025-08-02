@@ -1,0 +1,21 @@
+{% extends "base_login.html" %}
+{% load static %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'app/verificar_pregunta.css' %}">
+{% endblock %}
+
+
+{% block content %}
+  <div class="custom-fullpage-wrapper">
+    <div class="main-box">
+      <h2>Pregunta secreta</h2>
+      <p>{{ pregunta }}</p>
+      <form method="post" action="{% url 'verificar_respuesta' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Validar respuesta</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}

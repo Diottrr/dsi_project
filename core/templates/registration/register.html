@@ -1,0 +1,64 @@
+{% extends "base_login.html" %}
+{% load static %}
+{% block title %}Registro{% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{% static 'app/register.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="page-wrapper">
+  <div class="login-box">
+    <div class="login-logo">
+      <b>DSI</b> Registro
+    </div>
+    <div class="login-card-body">
+      {% if form.errors %}
+        <div class="alert alert-danger">
+          <ul class="mb-0">
+            {% for field in form %}
+              {% for error in field.errors %}
+                <li><strong>{{ field.label }}:</strong> {{ error }}</li>
+              {% endfor %}
+            {% endfor %}
+            {% for error in form.non_field_errors %}
+              <li>{{ error }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+          {{ form.username.label_tag }}
+          {{ form.username }}
+        </div>
+
+        <div class="form-group">
+          {{ form.email.label_tag }}
+          {{ form.email }}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+        </div>
+
+        <div class="form-group">
+          {{ form.pregunta_secreta.label_tag }}
+          {{ form.pregunta_secreta }}
+        </div>
+
+        <div class="form-group">
+          {{ form.respuesta_secreta.label_tag }}
+          {{ form.respuesta_secreta }}
+        </div>
+
+        <button type="submit">Registrarse</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
